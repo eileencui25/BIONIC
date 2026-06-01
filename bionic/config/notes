@@ -1,0 +1,98 @@
+1. **human_ppi.json** - Configuration for human PPI networks
+
+{
+  "net_names": [
+    "bionic/inputs/Hein-2015.txt",
+    "bionic/inputs/Huttlin-2015.txt",
+    "bionic/inputs/Huttlin-2017.txt",
+    "bionic/inputs/Rolland-2014.txt"
+  ],
+  "out_name": "bionic/outputs/human_ppi",
+  "epochs": 2123,
+  "batch_size": 2048,
+  "learning_rate": 0.0005830944755717023,
+  "gat_shapes": {
+    "dimension": 68,
+    "n_heads": 10,
+    "n_layers": 3
+  },
+  "embedding_size": 512,
+  "save_model": false
+}
+
+   - Uses 4 input datasets (Hein-2015, Huttlin-2015, Huttlin-2017, Rolland-2014)
+   - Trains for 2,123 epochs with batch size 2,048
+   - Uses a Graph Attention Network (GAT) with 68-dimensional embeddings, 10 attention heads, and 3 layers
+   - 512-dimensional final embeddings
+
+2. **yeast_gi_coex_ppi.json** - Yeast genetic interaction and co-expression PPI configuration
+{
+  "net_names": [
+    "bionic/inputs/Costanzo-2016.txt",
+    "bionic/inputs/Hu-2007.txt",
+    "bionic/inputs/Krogan-2006.txt"
+  ],
+  "out_name": "bionic/outputs/yeast_gi_coex_ppi",
+  "epochs": 2123,
+  "batch_size": 2048,
+  "learning_rate": 0.0005830944755717023,
+  "gat_shapes": {
+    "dimension": 68,
+    "n_heads": 10,
+    "n_layers": 3
+  },
+  "embedding_size": 512,
+  "save_model": false,
+  "model_parallel": true
+}
+3. **yeast_gi_coex_ppi_semisupervised.json** - Semi-supervised variant of the yeast configuration (larger file size suggests additional semi-supervised parameters)
+{
+  "net_names": [
+    "bionic/inputs/Costanzo-2016.txt",
+    "bionic/inputs/Hu-2007.txt",
+    "bionic/inputs/Krogan-2006.txt"
+  ],
+  "label_names": [
+    "bionic/inputs/yeast_IntAct_complex_labels.json"
+  ],
+  "out_name": "bionic/outputs/yeast_gi_coex_ppi_semisupervised",
+  "epochs": 2123,
+  "batch_size": 2048,
+  "learning_rate": 0.0005830944755717023,
+  "gat_shapes": {
+    "dimension": 68,
+    "n_heads": 10,
+    "n_layers": 3
+  },
+  "embedding_size": 512,
+  "lambda": 0.05,
+  "save_model": false,
+  "save_label_predictions": true
+}
+4. **yeast_gi_coex_ppi_tensorboard.json** - TensorBoard-enabled variant of the yeast configuration
+{
+  "net_names": [
+    "bionic/inputs/Costanzo-2016.txt",
+    "bionic/inputs/Hu-2007.txt",
+    "bionic/inputs/Krogan-2006.txt"
+  ],
+  "out_name": "bionic/outputs/yeast_gi_coex_ppi",
+  "epochs": 2123,
+  "batch_size": 2048,
+  "learning_rate": 0.0005830944755717023,
+  "gat_shapes": {
+    "dimension": 68,
+    "n_heads": 10,
+    "n_layers": 3
+  },
+  "embedding_size": 512,
+  "save_model": false,
+  "tensorboard": {
+    "training": true,
+    "embedding": true,
+    "comment": "tensorboard_example"
+  }
+}
+**Key insights:**
+- These are **experiment configuration files** for training the BIONIC neural network model
+- Each config specifies training hyperparameters, network architecture (GAT), input/output paths, and model settings
